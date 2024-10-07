@@ -90,9 +90,12 @@ class AppointmentActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     }
 
 
-    override fun onDateSet(p0: android.widget.DatePicker?, day: Int, month: Int, year:
-    Int) {
-        Toast.makeText(this@AppointmentActivity, "$year/${month+1}/$day", Toast.LENGTH_SHORT).show()
+    override fun onDateSet(view: android.widget.DatePicker?,
+                           year: Int,
+                           month:Int,
+                           day: Int) {
+        val tanggal = "$day/${month + 1}/$year"
+        binding.kalenderTxt.text = tanggal
     }
 
     override fun onTimeSet(p0: android.widget.TimePicker?, hour: Int, menit:Int) {
@@ -148,9 +151,9 @@ class AppointmentActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 class DatePicker: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(android.icu.util.Calendar.YEAR)
-        val monthOfYear = calendar.get(android.icu.util.Calendar.MONTH)
-        val dayOfMonth = calendar.get(android.icu.util.Calendar.DAY_OF_MONTH)
+        val year = calendar.get(Calendar.YEAR)
+        val monthOfYear = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
         return DatePickerDialog(
             requireActivity(),
             activity as DatePickerDialog.OnDateSetListener,

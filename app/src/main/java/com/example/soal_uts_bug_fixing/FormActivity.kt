@@ -12,6 +12,7 @@ import com.example.soal_uts_bug_fixing.databinding.ActivityFormBinding
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
     companion object{
+//        menambahkan variabel extra
     val EXTRA_NAMA = "EXTRA_name"
     val EXTRA_IDENTITAS = "EXTRA_identitas"
     val EXTRA_GENDER = "EXTRA_gender"
@@ -30,8 +31,9 @@ class FormActivity : AppCompatActivity() {
 
         with(binding){
             val adapterGenders = ArrayAdapter(this@FormActivity,
-                R.layout.custom_spinner, gendersArray)
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, gendersArray)
             adapterGenders.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            genderSpinner.adapter = adapterGenders
 
             genderSpinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
@@ -50,9 +52,11 @@ class FormActivity : AppCompatActivity() {
                     val intentToAppointment = Intent(this@FormActivity, AppointmentActivity::class.java)
                     intentToAppointment.putExtra(EXTRA_NAMA, namaEdt.text.toString())
                     intentToAppointment.putExtra(EXTRA_IDENTITAS, identitasEdt.text.toString())
+//                    menambahkan intent
                     intentToAppointment.putExtra(EXTRA_GENDER, genderInput)
                     intentToAppointment.putExtra(EXTRA_KELUHAN, keluhanEdt.text.toString())
-                    //
+//                    memulai intent
+                    startActivity(intentToAppointment)
                 }else{
                     Toast.makeText(this@FormActivity, "MASIH ADA KOLOM YANG KOSONG", Toast.LENGTH_SHORT).show()
                 }
